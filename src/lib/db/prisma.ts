@@ -3,7 +3,7 @@
  * Prevents connection leakage during Next.js hot-reloading.
  */
 
-import { PrismaClient } from "../../generated/prisma/client";
+import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 
@@ -13,7 +13,8 @@ const globalForPrisma = globalThis as unknown as {
 
 function createPrismaClient(): PrismaClient {
   const connectionString =
-    process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/mindfull?sslmode=disable";
+    process.env.DATABASE_URL ||
+    "postgresql://postgres:postgres@localhost:5432/mindfull?sslmode=disable";
   const pool = new Pool({
     connectionString,
     max: 10,
